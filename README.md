@@ -1,7 +1,7 @@
 # Project X ⚡
 ### Autonomous DevOps & SRE Incident Remediation Agent
 > **Submission for the Nebius x NVIDIA Global AI Hackathon — Best Apps & Agents Track**  
-> **Authors**: [Om Laxmi Narayan Gupta](https://github.com/OmLNGupta) & [Prince Rajpoot](https://github.com/princerajpoot)  
+> **Author**: [Om Laxmi Narayan Gupta](https://github.com/OmLNGupta)  
 > **Repository**: [https://github.com/OmLNGupta/Project-X.git](https://github.com/OmLNGupta/Project-X.git)  
 > **License**: MIT (2026)
 
@@ -187,4 +187,4 @@ cp .env.example .env
 ## 📄 License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.  
-Copyright (c) 2026 Om Laxmi Narayan Gupta & Prince Rajpoot.
+Copyright (c) 2026 Om Laxmi Narayan Gupta.

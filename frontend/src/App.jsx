@@ -361,7 +361,7 @@ export default function App() {
       <footer className="mt-12 border-t border-border/80 bg-surface/50 py-4 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            Project X © 2026 Om Laxmi Narayan Gupta & Prince Rajpoot. Released under the MIT License.
+            Project X © 2026 Om Laxmi Narayan Gupta. Released under the MIT License.
           </div>
           <div className="flex items-center space-x-2 font-mono text-[11px] text-slate-400">
             <span>Nebius x NVIDIA Global AI Hackathon</span>
