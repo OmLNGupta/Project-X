@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #070a12;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Diff Styling */
+.diff-line-add {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-left: 3px solid #10b981;
+}
+
+.diff-line-del {
+  background-color: rgba(244, 63, 94, 0.12);
+  color: #fb7185;
+  border-left: 3px solid #f43f5e;
+}
+
+.diff-line-header {
+  background-color: rgba(56, 189, 248, 0.08);
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.diff-line-meta {
+  background-color: rgba(139, 92, 246, 0.08);
+  color: #c084fc;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(13, 19, 34, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-glow-nvidia {
+  box-shadow: 0 0 25px -5px rgba(118, 185, 0, 0.15);
+}
+
+.glass-panel-glow-nebius {
+  box-shadow: 0 0 25px -5px rgba(0, 210, 255, 0.15);
+}

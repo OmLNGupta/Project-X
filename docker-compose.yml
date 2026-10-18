@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: project_x_backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    environment:
+      - NEBIUS_BASE_URL=${NEBIUS_BASE_URL:-https://api.tokenfactory.nebius.com/v1/}
+      - NEBIUS_API_KEY=${NEBIUS_API_KEY:-mock_dev_key}
+      - NEBIUS_FAST_MODEL=${NEBIUS_FAST_MODEL:-nvidia/nemotron-mini-4b-instruct}
+      - NEBIUS_HIGH_MODEL=${NEBIUS_HIGH_MODEL:-nvidia/Llama-3.1-Nemotron-70B-Instruct}
+      - TAVILY_API_KEY=${TAVILY_API_KEY:-}
+      - DATABASE_PATH=/app/data/project_x.db
+    volumes:
+      - backend_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: project_x_frontend
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_data:
