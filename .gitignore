@@ -27,6 +27,9 @@ pnpm-debug.log*
 *.db
 *.sqlite3
 
+# Vercel
+.vercel/
+
 # IDE / System
 .vscode/
 .idea/

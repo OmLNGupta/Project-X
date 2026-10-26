@@ -23,8 +23,11 @@ class Settings(BaseSettings):
     # Tavily Search API
     TAVILY_API_KEY: Optional[str] = os.getenv("TAVILY_API_KEY", "")
     
-    # Database Config
-    DATABASE_PATH: str = os.getenv("DATABASE_PATH", "project_x.db")
+    # Database Config (Uses /tmp on Vercel to support serverless read-only filesystem)
+    DATABASE_PATH: str = os.getenv(
+        "DATABASE_PATH",
+        "/tmp/project_x.db" if os.getenv("VERCEL") else "project_x.db"
+    )
     
     # Server Host & Port
     HOST: str = os.getenv("HOST", "0.0.0.0")

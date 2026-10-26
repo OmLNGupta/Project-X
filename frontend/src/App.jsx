@@ -242,7 +242,7 @@ export default function App() {
             setTelemetryEvents(prev => [...prev, { event: eventType, data: eventData }]);
           } else if (eventType === 'telemetry_switch') {
             setActiveTier('high');
-            if (eventData.to_model) setCurrentModel(eventData.to_model);
+            setCurrentModel(eventData.to_model || healthInfo.high_model || 'nvidia/Llama-3.1-Nemotron-70B-Instruct');
             setTelemetryEvents(prev => [...prev, { event: eventType, data: eventData }]);
           } else if (eventType === 'patch_stream') {
             setDiff(eventData.cumulative_diff || '');

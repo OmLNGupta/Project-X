@@ -40,7 +40,22 @@ export default function AgentInspector({
     return () => clearInterval(interval);
   }, [isStreaming, startTime, summary]);
 
-  const isHighTier = activeTier === 'high' || currentModel?.includes('70B');
+  const isHighTier = 
+    activeTier === 'high' || 
+    activeTier === '70B' || 
+    activeTier === 'high-tier' ||
+    Boolean(currentModel && (currentModel.includes('70B') || currentModel.includes('70b')));
+
+  // Ensure that when the active tier switches to 70B / HIGH-TIER COGNITIVE ENGINE,
+  // the model name text dynamically updates to 'nvidia/Llama-3.1-Nemotron-70B-Instruct'
+  // instead of remaining 'nvidia/nemotron-mini-4b-instruct'
+  const displayedModel = isHighTier
+    ? (currentModel && (currentModel.includes('70B') || currentModel.includes('70b'))
+        ? currentModel
+        : 'nvidia/Llama-3.1-Nemotron-70B-Instruct')
+    : (currentModel && !currentModel.includes('70B') && !currentModel.includes('70b')
+        ? currentModel
+        : 'nvidia/nemotron-mini-4b-instruct');
 
   return (
     <div className="flex flex-col space-y-4">
@@ -88,7 +103,7 @@ export default function AgentInspector({
           </div>
           <div>
             <div className="text-sm font-bold font-mono text-slate-100">
-              {currentModel || (isHighTier ? 'nvidia/Llama-3.1-Nemotron-70B-Instruct' : 'nvidia/nemotron-mini-4b-instruct')}
+              {displayedModel}
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
               {isHighTier 
