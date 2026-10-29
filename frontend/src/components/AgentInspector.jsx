@@ -46,9 +46,6 @@ export default function AgentInspector({
     activeTier === 'high-tier' ||
     Boolean(currentModel && (currentModel.includes('70B') || currentModel.includes('70b')));
 
-  // Ensure that when the active tier switches to 70B / HIGH-TIER COGNITIVE ENGINE,
-  // the model name text dynamically updates to 'nvidia/Llama-3.1-Nemotron-70B-Instruct'
-  // instead of remaining 'nvidia/nemotron-mini-4b-instruct'
   const displayedModel = isHighTier
     ? (currentModel && (currentModel.includes('70B') || currentModel.includes('70b'))
         ? currentModel
@@ -60,52 +57,52 @@ export default function AgentInspector({
   return (
     <div className="flex flex-col space-y-4">
       {/* Panel Header */}
-      <div className="flex items-center justify-between bg-card p-3 rounded-xl border border-border">
+      <div className="flex items-center justify-between bg-white/45 backdrop-blur-2xl p-4 rounded-2xl border border-white/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.08)] shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.9)]">
         <div className="flex items-center space-x-2">
-          <Activity className="w-4 h-4 text-nebius" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+          <Activity className="w-4 h-4 text-teal-600" />
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
             Agent Inspector & Telemetry HUD
           </span>
         </div>
-        <div className="flex items-center space-x-1.5 text-[11px] font-mono text-slate-400">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>SSE Stream Active</span>
+        <div className="flex items-center space-x-1.5 text-[11px] font-mono text-slate-500">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.7)]"></span>
+          <span className="font-semibold text-emerald-700">SSE Stream Active</span>
         </div>
       </div>
 
       {/* Dynamic Active Model Gauge Card */}
-      <div className={`p-4 rounded-xl border transition-all duration-500 ${
+      <div className={`p-4 rounded-2xl border transition-all duration-300 shadow-[0_8px_32px_0_rgba(31,38,135,0.08)] shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.9)] ${
         isHighTier
-          ? 'bg-gradient-to-br from-card via-[#18152e] to-card border-purple-500/40 shadow-lg shadow-purple-500/10'
-          : 'bg-gradient-to-br from-card via-[#0e1d16] to-card border-nvidia/40 shadow-lg shadow-nvidia/10'
+          ? 'bg-gradient-to-br from-violet-50/70 via-white/50 to-purple-50/50 backdrop-blur-2xl border-violet-200'
+          : 'bg-gradient-to-br from-emerald-50/70 via-white/50 to-teal-50/50 backdrop-blur-2xl border-emerald-200'
       }`}>
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 flex items-center space-x-1">
-            <Cpu className="w-3.5 h-3.5" />
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 flex items-center space-x-1.5">
+            <Cpu className="w-3.5 h-3.5 text-slate-500" />
             <span>Active Cognitive Tier</span>
           </span>
-          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+          <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border shadow-sm ${
             isHighTier 
-              ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40' 
-              : 'bg-nvidia/20 text-nvidia-light border border-nvidia/40'
+              ? 'bg-violet-100/90 text-violet-800 border-violet-300' 
+              : 'bg-emerald-100/90 text-emerald-800 border-emerald-300'
           }`}>
             {isHighTier ? 'High-Tier Cognitive Engine' : 'Fast-Tier Triage Engine'}
           </span>
         </div>
 
-        <div className="mt-3 flex items-center space-x-3">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm ${
+        <div className="mt-3 flex items-center space-x-3.5">
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm ${
             isHighTier 
-              ? 'bg-purple-600/30 text-purple-300 ring-1 ring-purple-400/30' 
-              : 'bg-nvidia/30 text-nvidia ring-1 ring-nvidia/40'
+              ? 'bg-violet-200/80 text-violet-900 border border-violet-300' 
+              : 'bg-emerald-200/80 text-emerald-900 border border-emerald-300'
           }`}>
             {isHighTier ? '70B' : '4B'}
           </div>
           <div>
-            <div className="text-sm font-bold font-mono text-slate-100">
+            <div className="text-sm font-bold font-mono text-slate-900">
               {displayedModel}
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               {isHighTier 
                 ? 'Complex AST mutation, code synthesis & unified diff patching' 
                 : 'Rapid log parsing, syntax analysis & tool query formulation'}
@@ -114,93 +111,93 @@ export default function AgentInspector({
         </div>
 
         {/* Tier Switching Transition Visual Indicator */}
-        <div className="mt-3.5 pt-3 border-t border-border/60 flex items-center justify-between text-xs">
+        <div className="mt-3.5 pt-3 border-t border-white/60 flex items-center justify-between text-xs">
           <div className="flex items-center space-x-2">
-            <span className={`px-2 py-0.5 rounded text-[10px] font-mono ${
-              !isHighTier ? 'bg-nvidia/20 text-nvidia font-bold' : 'text-slate-500'
+            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+              !isHighTier ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'text-slate-400'
             }`}>
               Nemotron-Mini (4B)
             </span>
-            <ArrowRight className={`w-3.5 h-3.5 ${isHighTier ? 'text-purple-400 animate-pulse' : 'text-slate-600'}`} />
-            <span className={`px-2 py-0.5 rounded text-[10px] font-mono ${
-              isHighTier ? 'bg-purple-500/20 text-purple-300 font-bold' : 'text-slate-500'
+            <ArrowRight className={`w-3.5 h-3.5 ${isHighTier ? 'text-violet-600 animate-pulse' : 'text-slate-400'}`} />
+            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+              isHighTier ? 'bg-violet-100 text-violet-800 border border-violet-300' : 'text-slate-400'
             }`}>
               Nemotron (70B)
             </span>
           </div>
 
-          <span className="text-[11px] text-slate-400 font-medium">
+          <span className="text-[11px] text-slate-600 font-medium">
             {isHighTier ? '⚡ Escalated for Code Patch' : '⚡ Initial Triage'}
           </span>
         </div>
       </div>
 
-      {/* Telemetry Metrics Grid */}
+      {/* Telemetry Metrics Grid (Latency, Velocity, Efficiency) */}
       <div className="grid grid-cols-3 gap-2.5">
         {/* Latency Timer */}
-        <div className="bg-card p-3 rounded-xl border border-border flex flex-col justify-between">
-          <div className="flex items-center space-x-1.5 text-slate-400 text-xs">
-            <Clock className="w-3.5 h-3.5 text-nebius" />
+        <div className="bg-white/50 backdrop-blur-xl border border-white/75 rounded-xl p-3 shadow-[0_4px_16px_rgba(31,38,135,0.05)] flex flex-col justify-between">
+          <div className="flex items-center space-x-1.5 text-slate-500 text-xs font-medium">
+            <Clock className="w-3.5 h-3.5 text-sky-600" />
             <span>Latency</span>
           </div>
-          <div className="mt-2 text-lg font-bold font-mono text-slate-100">
+          <div className="mt-2 text-xl font-bold font-mono text-slate-900 tracking-tight">
             {elapsedTimer > 0 ? `${(elapsedTimer / 1000).toFixed(2)}s` : '0.00s'}
           </div>
-          <div className="text-[10px] text-slate-500">
-            {summary?.fast_tier_latency_ms ? `4B: ${summary.fast_tier_latency_ms}ms | 70B: ${summary.high_tier_latency_ms}ms` : 'Real-time timer'}
+          <div className="text-[10px] text-slate-500 truncate mt-1">
+            {summary?.fast_tier_latency_ms ? `4B: ${summary.fast_tier_latency_ms}ms` : 'Real-time timer'}
           </div>
         </div>
 
         {/* Token Velocity */}
-        <div className="bg-card p-3 rounded-xl border border-border flex flex-col justify-between">
-          <div className="flex items-center space-x-1.5 text-slate-400 text-xs">
-            <Gauge className="w-3.5 h-3.5 text-nvidia" />
+        <div className="bg-white/50 backdrop-blur-xl border border-white/75 rounded-xl p-3 shadow-[0_4px_16px_rgba(31,38,135,0.05)] flex flex-col justify-between">
+          <div className="flex items-center space-x-1.5 text-slate-500 text-xs font-medium">
+            <Gauge className="w-3.5 h-3.5 text-emerald-600" />
             <span>Velocity</span>
           </div>
-          <div className="mt-2 text-lg font-bold font-mono text-nvidia-light">
+          <div className="mt-2 text-xl font-bold font-mono text-emerald-700 tracking-tight">
             {summary?.tokens_per_sec || (isStreaming ? '142.0' : '0.0')}
-            <span className="text-[11px] text-slate-400 font-normal ml-1">t/s</span>
+            <span className="text-xs text-slate-500 font-normal ml-0.5">t/s</span>
           </div>
-          <div className="text-[10px] text-slate-500">
+          <div className="text-[10px] text-slate-500 truncate mt-1">
             {summary?.total_tokens ? `${summary.total_tokens} tokens` : 'Generation rate'}
           </div>
         </div>
 
         {/* Cost Reduction */}
-        <div className="bg-card p-3 rounded-xl border border-border flex flex-col justify-between">
-          <div className="flex items-center space-x-1.5 text-slate-400 text-xs">
-            <Coins className="w-3.5 h-3.5 text-amber-400" />
+        <div className="bg-white/50 backdrop-blur-xl border border-white/75 rounded-xl p-3 shadow-[0_4px_16px_rgba(31,38,135,0.05)] flex flex-col justify-between">
+          <div className="flex items-center space-x-1.5 text-slate-500 text-xs font-medium">
+            <Coins className="w-3.5 h-3.5 text-amber-600" />
             <span>Efficiency</span>
           </div>
-          <div className="mt-2 text-lg font-bold font-mono text-amber-300">
+          <div className="mt-2 text-xl font-bold font-mono text-amber-700 tracking-tight">
             ~84.6%
           </div>
-          <div className="text-[10px] text-slate-500">
-            Compute cost saved
+          <div className="text-[10px] text-slate-500 truncate mt-1">
+            Compute saved
           </div>
         </div>
       </div>
 
       {/* Execution Trace Timeline */}
-      <div className="bg-card rounded-xl border border-border overflow-hidden flex flex-col flex-1">
-        <div className="px-4 py-2.5 bg-surface border-b border-border flex items-center justify-between">
+      <div className="bg-white/45 backdrop-blur-2xl rounded-2xl border border-white/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.08)] shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.9)] overflow-hidden flex flex-col flex-1">
+        <div className="px-4 py-3 bg-white/30 border-b border-white/50 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Layers className="w-3.5 h-3.5 text-nebius" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <Layers className="w-3.5 h-3.5 text-teal-600" />
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
               Execution Trace & Tool Pipeline
             </span>
           </div>
-          <span className="text-[10px] text-slate-500 font-mono">
+          <span className="text-[10px] text-slate-700 font-mono font-semibold px-2.5 py-0.5 rounded-full bg-white/60 border border-white/80 shadow-sm">
             {telemetryEvents.length} events
           </span>
         </div>
 
         <div className="p-4 space-y-3.5 max-h-[460px] overflow-y-auto">
           {telemetryEvents.length === 0 ? (
-            <div className="py-12 text-center text-slate-500">
+            <div className="py-12 text-center text-slate-400">
               <Terminal className="w-7 h-7 mx-auto mb-2 opacity-40 text-slate-400" />
-              <p className="text-xs">No active execution trace yet.</p>
-              <p className="text-[11px] text-slate-600 mt-1">
+              <p className="text-xs font-semibold text-slate-700">No active execution trace yet.</p>
+              <p className="text-[11px] text-slate-500 mt-1">
                 Click "Run Autonomous Triage & Fix" to stream the live agent reasoning chain.
               </p>
             </div>
@@ -211,16 +208,16 @@ export default function AgentInspector({
               if (type === 'telemetry_init') {
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className="w-6 h-6 rounded-lg bg-nvidia/20 text-nvidia flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 border border-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
                       <Zap className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-surface/60 p-2.5 rounded-lg border border-border">
+                    <div className="flex-1 bg-white/55 backdrop-blur-md p-3 rounded-xl border border-white/80 shadow-sm">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-nvidia">Telemetry Initialized</span>
+                        <span className="font-bold text-emerald-800">Telemetry Initialized</span>
                         <span className="text-[10px] font-mono text-slate-500">{data.tier_name}</span>
                       </div>
-                      <p className="text-slate-300 mt-1 text-[11px]">
-                        Agent session spawned. Active model: <code className="text-nvidia-light font-mono">{data.model}</code>
+                      <p className="text-slate-700 mt-1 text-[11px]">
+                        Agent session spawned. Active model: <code className="text-emerald-700 font-mono bg-emerald-50 px-1 py-0.5 rounded border border-emerald-200">{data.model}</code>
                       </p>
                     </div>
                   </div>
@@ -231,21 +228,21 @@ export default function AgentInspector({
                 const isHigh = data.tier === 'high';
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
-                      isHigh ? 'bg-purple-500/20 text-purple-300' : 'bg-nvidia/20 text-nvidia'
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5 border ${
+                      isHigh ? 'bg-violet-100 text-violet-700 border-violet-300' : 'bg-emerald-100 text-emerald-700 border-emerald-300'
                     }`}>
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-surface/60 p-2.5 rounded-lg border border-border">
+                    <div className="flex-1 bg-white/55 backdrop-blur-md p-3 rounded-xl border border-white/80 shadow-sm">
                       <div className="flex items-center justify-between">
-                        <span className={`font-semibold ${isHigh ? 'text-purple-300' : 'text-nvidia-light'}`}>
+                        <span className={`font-bold ${isHigh ? 'text-violet-800' : 'text-emerald-800'}`}>
                           {data.title || `Cognitive Reasoning (Step ${data.step})`}
                         </span>
                         <span className="text-[10px] font-mono text-slate-500">
                           {data.elapsed_ms ? `${data.elapsed_ms}ms` : ''}
                         </span>
                       </div>
-                      <p className="text-slate-300 mt-1 text-[11px] leading-relaxed whitespace-pre-line">
+                      <p className="text-slate-700 mt-1 text-[11px] leading-relaxed whitespace-pre-line">
                         {data.content}
                       </p>
                     </div>
@@ -256,18 +253,18 @@ export default function AgentInspector({
               if (type === 'tool_call') {
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className="w-6 h-6 rounded-lg bg-nebius/20 text-nebius flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-sky-100 text-sky-700 border border-sky-300 flex items-center justify-center shrink-0 mt-0.5">
                       <Search className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-surface/60 p-2.5 rounded-lg border border-border">
+                    <div className="flex-1 bg-white/55 backdrop-blur-md p-3 rounded-xl border border-white/80 shadow-sm">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-nebius">Tool Invocation: Tavily Search</span>
-                        <span className="text-[10px] px-1.5 py-0.2 bg-nebius/10 text-nebius rounded border border-nebius/30">
+                        <span className="font-bold text-sky-800">Tool Invocation: Tavily Search</span>
+                        <span className="text-[10px] px-1.5 py-0.2 bg-sky-50 text-sky-700 rounded border border-sky-200 font-mono">
                           RAG
                         </span>
                       </div>
-                      <p className="text-slate-400 mt-1 text-[11px]">
-                        Query: <span className="text-slate-200 font-mono">"{data.query}"</span>
+                      <p className="text-slate-700 mt-1 text-[11px]">
+                        Query: <span className="text-slate-900 font-mono bg-white/70 px-1 py-0.5 rounded border border-slate-200">"{data.query}"</span>
                       </p>
                       {data.purpose && (
                         <p className="text-slate-500 text-[10px] mt-0.5 italic">{data.purpose}</p>
@@ -281,12 +278,12 @@ export default function AgentInspector({
                 const sources = data.sources || [];
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 border border-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
                       <BookOpen className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-surface/60 p-2.5 rounded-lg border border-border space-y-2">
+                    <div className="flex-1 bg-white/55 backdrop-blur-md p-3 rounded-xl border border-white/80 shadow-sm space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-emerald-400">
+                        <span className="font-bold text-emerald-800">
                           Tavily Search Documentation Retrieved
                         </span>
                         <span className="text-[10px] text-slate-500 font-mono">
@@ -296,22 +293,22 @@ export default function AgentInspector({
 
                       <div className="space-y-1.5 mt-1">
                         {sources.map((src, sIdx) => (
-                          <div key={sIdx} className="p-2 rounded bg-background/70 border border-border/80 text-[11px]">
+                          <div key={sIdx} className="p-2 rounded-lg bg-white/60 border border-slate-200/80 text-[11px]">
                             <div className="flex items-center justify-between">
-                              <span className="font-medium text-slate-200 truncate pr-2">
+                              <span className="font-semibold text-slate-800 truncate pr-2">
                                 {src.title}
                               </span>
                               <a
                                 href={src.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-nebius hover:underline flex items-center space-x-0.5 shrink-0"
+                                className="text-sky-700 hover:underline flex items-center space-x-0.5 shrink-0"
                               >
                                 <span>docs</span>
                                 <ExternalLink className="w-2.5 h-2.5" />
                               </a>
                             </div>
-                            <p className="text-slate-400 text-[10px] mt-1 line-clamp-2">
+                            <p className="text-slate-600 text-[10px] mt-1 line-clamp-2">
                               {src.content}
                             </p>
                           </div>
@@ -325,19 +322,19 @@ export default function AgentInspector({
               if (type === 'telemetry_switch') {
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 mt-0.5 animate-pulse">
+                    <div className="w-6 h-6 rounded-lg bg-violet-100 text-violet-700 border border-violet-300 flex items-center justify-center shrink-0 mt-0.5 animate-pulse">
                       <Cpu className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-purple-950/20 p-2.5 rounded-lg border border-purple-500/30">
+                    <div className="flex-1 bg-violet-50/80 backdrop-blur-md p-3 rounded-xl border border-violet-200 shadow-sm">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-purple-300">
+                        <span className="font-bold text-violet-800">
                           Dynamic Multi-Tier Escalation
                         </span>
-                        <span className="text-[10px] font-mono text-purple-400">
+                        <span className="text-[10px] font-mono text-violet-700 font-semibold bg-violet-100 px-1.5 py-0.5 rounded border border-violet-300">
                           Nemotron 70B Engaged
                         </span>
                       </div>
-                      <p className="text-slate-300 mt-1 text-[11px] leading-relaxed">
+                      <p className="text-slate-700 mt-1 text-[11px] leading-relaxed">
                         {data.reason}
                       </p>
                     </div>
@@ -348,19 +345,19 @@ export default function AgentInspector({
               if (type === 'execution_summary') {
                 return (
                   <div key={idx} className="flex items-start space-x-2.5 text-xs">
-                    <div className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 border border-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                     </div>
-                    <div className="flex-1 bg-emerald-950/20 p-2.5 rounded-lg border border-emerald-500/30">
+                    <div className="flex-1 bg-emerald-50/80 backdrop-blur-md p-3 rounded-xl border border-emerald-200 shadow-sm">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-emerald-300">
+                        <span className="font-bold text-emerald-800">
                           Remediation Completed
                         </span>
-                        <span className="text-[10px] font-mono text-emerald-400">
+                        <span className="text-[10px] font-mono text-emerald-700 font-semibold">
                           {data.total_latency_ms}ms
                         </span>
                       </div>
-                      <p className="text-slate-300 mt-1 text-[11px]">
+                      <p className="text-slate-700 mt-1 text-[11px]">
                         Generated unified patch (+{data.diff_additions} / -{data.diff_deletions} lines). Token velocity: {data.tokens_per_sec} t/s. Compute cost reduced by {data.cost_reduction_percent}%.
                       </p>
                     </div>

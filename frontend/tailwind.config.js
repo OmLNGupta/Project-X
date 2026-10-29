@@ -8,41 +8,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#070a12',
-        surface: '#0d1322',
-        card: '#121a2d',
-        cardHover: '#17223b',
-        border: '#1e293b',
-        borderHover: '#334155',
+        background: '#f8fafc',
+        surface: 'rgba(255, 255, 255, 0.7)',
+        card: 'rgba(255, 255, 255, 0.65)',
+        cardHover: 'rgba(255, 255, 255, 0.85)',
+        border: 'rgba(226, 232, 240, 0.8)',
+        borderHover: 'rgba(203, 213, 225, 0.9)',
         nvidia: {
-          DEFAULT: '#76b900',
-          dark: '#5a8d00',
-          light: '#9be31a',
-          glow: 'rgba(118, 185, 0, 0.25)',
+          DEFAULT: '#65a30d',
+          dark: '#4d7c0f',
+          light: '#84cc16',
+          glow: 'rgba(101, 163, 13, 0.25)',
         },
         nebius: {
-          DEFAULT: '#00d2ff',
-          dark: '#0094b8',
-          light: '#5ce1e6',
-          glow: 'rgba(0, 210, 255, 0.25)',
+          DEFAULT: '#0284c7',
+          dark: '#0369a1',
+          light: '#38bdf8',
+          glow: 'rgba(2, 132, 199, 0.25)',
         },
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      boxShadow: {
+        'pastel-card': '0 8px 30px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9)',
+        'pastel-pill': '0 2px 8px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
+      },
       animation: {
-        'pulse-glow': 'pulseGlow 2.5s infinite',
-        'shimmer': 'shimmer 2s linear infinite',
+        'pulse-slow': 'pulseGlow 4s ease-in-out infinite',
       },
       keyframes: {
         pulseGlow: {
           '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-          '50%': { opacity: '0.8', transform: 'scale(1.02)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
+          '50%': { opacity: '0.7', transform: 'scale(1.04)' },
         }
       }
     },

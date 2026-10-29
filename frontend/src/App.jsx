@@ -206,7 +206,7 @@ export default function App() {
 
         buffer += decoder.decode(value, { stream: true });
         const parts = buffer.split('\n\n');
-        buffer = parts.pop() || ''; // Keep incomplete part in buffer
+        buffer = parts.pop() || '';
 
         for (const block of parts) {
           if (!block.trim()) continue;
@@ -269,7 +269,6 @@ export default function App() {
       ]);
     } finally {
       setIsStreaming(false);
-      // Refresh incidents in background
       setTimeout(fetchHealthAndHistory, 500);
     }
   };
@@ -287,8 +286,25 @@ export default function App() {
   }, [errorLog, codeSnippet, isStreaming]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col text-slate-100 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-100 relative overflow-x-hidden text-slate-800 font-sans selection:bg-violet-200 selection:text-violet-900 flex flex-col">
       
+      {/* =========================================================================
+          1. VIBRANT AMBIENT BACKGROUND: Fixed glowing orbs behind the glass UI
+          ========================================================================= */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        {/* Top-left vibrant cyan/sky glow */}
+        <div className="absolute -top-24 -left-24 w-[36rem] h-[36rem] rounded-full bg-cyan-400/35 blur-[120px]" />
+        
+        {/* Center-right electric violet glow */}
+        <div className="absolute top-1/4 -right-20 w-[42rem] h-[42rem] rounded-full bg-violet-500/30 blur-[140px]" />
+        
+        {/* Bottom-left fuchsia/orchid glow */}
+        <div className="absolute -bottom-24 left-1/3 w-[38rem] h-[38rem] rounded-full bg-fuchsia-400/25 blur-[130px]" />
+        
+        {/* Top-center soft blue beam */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50rem] h-64 bg-blue-300/30 blur-[100px]" />
+      </div>
+
       {/* Top Navigation */}
       <Header
         healthInfo={healthInfo}
@@ -298,28 +314,28 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         
-        {/* Hero Intro Banner */}
-        <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-card via-surface to-card border border-border/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
+        {/* Top Hero Banner in true Frosted Glassmorphism */}
+        <div className="mb-6 p-5 rounded-2xl bg-white/45 backdrop-blur-2xl border border-white/70 shadow-[0_8px_32px_0_rgba(31,38,135,0.08)] shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.9)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all">
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-nvidia animate-ping"></span>
-              <h2 className="text-base font-bold text-white tracking-tight">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+              <h2 className="text-base font-extrabold text-slate-900 tracking-tight">
                 Autonomous DevOps & SRE Incident Remediation Agent
               </h2>
             </div>
-            <p className="text-xs text-slate-400 max-w-3xl leading-relaxed">
-              Powered by <strong className="text-nebius">Nebius AI Token Factory</strong> and <strong className="text-nvidia">NVIDIA Nemotron</strong> models. Features dynamic multi-tier cognitive routing: ultra-fast 4B AST triage, real-time Tavily search RAG, and deep 70B unified git diff synthesis.
+            <p className="text-xs text-slate-600 max-w-3xl leading-relaxed">
+              Powered by <strong className="text-sky-700 font-semibold">Nebius AI Token Factory</strong> and <strong className="text-emerald-700 font-semibold">NVIDIA Nemotron</strong> models. Features dynamic multi-tier cognitive routing: ultra-fast 4B AST triage, real-time Tavily search RAG, and deep 70B unified git diff synthesis.
             </p>
           </div>
 
           <div className="flex items-center space-x-3 shrink-0">
             <button
               onClick={() => handleLoadPreset(0)}
-              className="px-3.5 py-2 rounded-xl bg-nvidia/10 hover:bg-nvidia/20 border border-nvidia/40 text-xs font-semibold text-nvidia-light transition-all shadow-sm flex items-center space-x-1.5"
+              className="bg-white/60 hover:bg-white/80 backdrop-blur-md border border-white/80 text-violet-900 font-semibold text-xs px-4 py-2 rounded-full shadow-sm hover:shadow transition-all active:scale-[0.98] flex items-center space-x-1.5"
             >
-              <span>1-Click Hero Demo</span>
+              <span>⚡ 1-Click Hero Demo</span>
             </button>
           </div>
         </div>
@@ -357,16 +373,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-12 border-t border-border/80 bg-surface/50 py-4 text-center text-xs text-slate-500">
+      {/* Footer in Frosted Glass */}
+      <footer className="relative z-10 mt-12 border-t border-white/60 bg-white/40 backdrop-blur-xl py-4 text-center text-xs text-slate-600">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
             Project X © 2026 Om Laxmi Narayan Gupta. Released under the MIT License.
           </div>
-          <div className="flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+          <div className="flex items-center space-x-2 font-mono text-[11px] text-slate-600">
             <span>Nebius x NVIDIA Global AI Hackathon</span>
             <span>•</span>
-            <span className="text-nvidia">Best Apps & Agents Track</span>
+            <span className="text-emerald-700 font-bold">Best Apps & Agents Track</span>
           </div>
         </div>
       </footer>
